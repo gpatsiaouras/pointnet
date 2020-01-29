@@ -167,7 +167,7 @@ def eval_one_epoch(sess, ops, num_votes=1, topk=1):
         log_string('%10s:\t%0.3f' % (name, class_accuracies[i]))
 
 
-def evaluate_one_pointcloud(h5file):
+def evaluate_one_pointcloud(h5file, num_votes):
     BATCH_SIZE = 1
     NUM_POINT = 2048
     is_training = False
@@ -197,19 +197,21 @@ def evaluate_one_pointcloud(h5file):
            'loss': loss}
 
     current_data, current_label = provider.loadDataFile(h5file)
-    feed_dict = {
-        ops['pointclouds_pl']: current_data,
-        ops['labels_pl']: current_label,
-        ops['is_training_pl']: is_training
-    }
-    loss_val, pred_val = sess.run([ops['loss'], ops['pred']], feed_dict=feed_dict)
-
-    print(loss_val)
-    print(pred_val)
+    for vote_idx in range(num_votes):
+        rotated_data = provider.rotate_point_cloud_by_angle(current_data, vote_idx / float(num_votes) * np.pi * 2)
+        feed_dict = {
+            ops['pointclouds_pl']: rotated_data,
+            ops['labels_pl']: current_label,
+            ops['is_training_pl']: is_training
+        }
+        loss_val, pred_val = sess.run([ops['loss'], ops['pred']], feed_dict=feed_dict)
+        print(pred_val)
 
 
 if __name__ == '__main__':
-    # with tf.Graph().as_default():
-    #     evaluate(num_votes=4)
-    evaluate_one_pointcloud("data/giorgos/recording_2048.h5")
+    start_time = time.time()
+    with tf.Graph().as_default():
+        evaluate(num_votes=4)
+    end_time = time.time()
+    print("Took %f sec" % (end_time - start_time))
     LOG_FOUT.close()
