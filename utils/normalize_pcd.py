@@ -1,5 +1,5 @@
 # Example
-# python3 utils/normalize_pcd.py --folder data/giorgos_test_pcd_files/ --filename_in model_2048.pcd --filename_out model_2048_normalized.pcd
+# python3 utils/normalize_pcd.py --folder data/classification_test_pcd_files/ --filename_in model_2048.pcd --filename_out model_2048_normalized.pcd
 
 import pcl
 import numpy as np

@@ -106,7 +106,7 @@ if __name__ == "__main__":
     group.add_argument("--file_in", default="", help="Specify the path to the input pointcloud pcd")
     group.add_argument("--folder_in", default="",
                        help="Specify folder containing pointcloud pcd files with trailing slash")
-    parser.add_argument("--h5filename", default="data/giorgos/customtest0.h5",
+    parser.add_argument("--h5filename", default="data/classification/customtest0.h5",
                         help="Specify the name of the pcd files of the output")
     FLAGS = parser.parse_args()
 
@@ -116,8 +116,8 @@ if __name__ == "__main__":
         create_h5_from_folder(FLAGS.folder_in, FLAGS.h5filename)
     else:
         # We have 2913 airplanes and 731 cars
-        airplane_path = "/home/giorgos/Public/shapenet/2048_res_pcd_dataset/airplane-02691156/*"
-        car_path = "/home/giorgos/Public/shapenet/2048_res_pcd_dataset/car-02958343/*"
+        airplane_path = "/home/classification/Public/shapenet/2048_res_pcd_dataset/airplane-02691156/*"
+        car_path = "/home/classification/Public/shapenet/2048_res_pcd_dataset/car-02958343/*"
 
         # Assess that all pcd files have exactly 2048 points before performing any operation
         check_2048_and_prompt_for_delete(glob(airplane_path) + glob(car_path))
@@ -137,7 +137,7 @@ if __name__ == "__main__":
         data1, label1 = get_data_from_pointclouds(1024, airplane_pointclouds[1648:2496], car_pointclouds[400:600])
 
         # Call util to write h5 file
-        save_h5("data/giorgos/train0.h5", data0, label0, "float64")
-        save_h5("data/giorgos/test0.h5", data1, label1, "float64")
+        save_h5("data/classification/train0.h5", data0, label0, "float64")
+        save_h5("data/classification/test0.h5", data1, label1, "float64")
 
     print("\n Completed!")

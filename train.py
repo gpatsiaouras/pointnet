@@ -59,8 +59,8 @@ BN_DECAY_CLIP = 0.99
 HOSTNAME = socket.gethostname()
 
 # ModelNet40 official train/test split
-TRAIN_FILES = provider.getDataFiles(os.path.join(BASE_DIR, 'data/giorgos/train_files.txt'))
-TEST_FILES = provider.getDataFiles(os.path.join(BASE_DIR, 'data/giorgos/test_files.txt'))
+TRAIN_FILES = provider.getDataFiles(os.path.join(BASE_DIR, 'data/classification/train_files.txt'))
+TEST_FILES = provider.getDataFiles(os.path.join(BASE_DIR, 'data/classification/test_files.txt'))
 
 def log_string(out_str):
     LOG_FOUT.write(out_str+'\n')

@@ -38,13 +38,13 @@ LOG_FOUT = open(os.path.join(DUMP_DIR, 'log_evaluate.txt'), 'w')
 LOG_FOUT.write(str(FLAGS) + '\n')
 
 NUM_CLASSES = 2
-SHAPE_NAMES = [line.rstrip() for line in open(os.path.join(BASE_DIR, 'data/giorgos/shape_names.txt'))]
+SHAPE_NAMES = [line.rstrip() for line in open(os.path.join(BASE_DIR, 'data/classification/shape_names.txt'))]
 
 HOSTNAME = socket.gethostname()
 
 # ModelNet40 official train/test split
-TRAIN_FILES = provider.getDataFiles(os.path.join(BASE_DIR, 'data/giorgos/train_files.txt'))
-TEST_FILES = provider.getDataFiles(os.path.join(BASE_DIR, 'data/giorgos/test_files.txt'))
+TRAIN_FILES = provider.getDataFiles(os.path.join(BASE_DIR, 'data/classification/train_files.txt'))
+TEST_FILES = provider.getDataFiles(os.path.join(BASE_DIR, 'data/classification/test_files.txt'))
 
 
 def log_string(out_str):
